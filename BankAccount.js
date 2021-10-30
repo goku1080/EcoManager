@@ -20,17 +20,22 @@ class BankAccount {
     }
     async addBalance(amount = 1){
         if(!await this.rest.db.accs.get(this.user)) return false;
+        var total = this.balance + amount;
         this.rest.db.accs.add(`${this.user}.balance`, parseInt(amount));
+        this.balance = total;
         return true;
     }
     async removeBalance(amount = 1){
         if(!await this.rest.db.accs.get(this.user)) return false;
+        var total = this.balance - amount;
         this.rest.db.accs.substract(`${this.user}.balance`, parseInt(amount));
+        this.balance = total;
         return true;
     }
     async setBalance(amount){
         if(!await this.rest.db.accs.get(this.user)) return false;
         this.rest.db.accs.set(`${this.user}.balance`, parseInt(amount));
+        this.balance = amount;
         return true;
     }
     async fetchCards(){
@@ -68,9 +73,11 @@ class BankAccount {
         if(!await this.rest.db.accs.get(this.user)) return false;
         var card = this.raw.cards.find(c => c.id == id);
         if(!card) return false;
-        var newCardsArr = this.raw.cards.filter(c => c.id != id);
+        card.valid = false;
+        var newCardsArr = this.raw.cards.filter(c => c.id != id).push(card);
         this.raw.cards = newCardsArr;
-        this.rest.db.accs.set(`${id}.cards`, newCardsArr);
+        this.rest.db.accs.set(`${this.user}.cards`, newCardsArr);
         return true;
     }
 }
+module.exports = BankAccount;
