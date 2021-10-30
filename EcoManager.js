@@ -14,8 +14,7 @@ class EcoManager {
              id: user.id,
              tag: user.tag
             },
-            cash: 0,
-            bankAccountID: null
+            cash: 0
         });
         return true;
     }
