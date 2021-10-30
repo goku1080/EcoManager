@@ -3,6 +3,7 @@ class InventoryManager {
     constructor(rest, manager){
         this.rest = rest;
         this.manager = manager;
+        this.nothing = null;
     }
     async create(userID){
       var isCreated = await this.rest.db.inventories.get(userID);
