@@ -1,3 +1,4 @@
+const Item = require('./Item.js');
 class InventoryItem {
     constructor(rest, raw, inventory){
         this.rest = rest;
@@ -10,7 +11,8 @@ class InventoryItem {
     async fetchItem(){ // Get Original Item
          var item = await this.rest.restObj.itemManager.get(this.itemID);
          if(!item) return false;
-         return item;
+         var iL = new Item(this.rest, item);
+         return iL;
     }
     add(amount){ // Adds an amount of the item to the inventory
      var inv = await this.rest.db.inventories.get(this.inventory.userID);
