@@ -11,3 +11,4 @@ class TransactionManager {
         return accountTransactions;
     }
 }
+module.exports = TransactionManager;

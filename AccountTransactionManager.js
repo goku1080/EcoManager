@@ -69,3 +69,4 @@ class AccountTransactionManager {
       }
     }
 }
+module.exports = AccountTransactionManager;

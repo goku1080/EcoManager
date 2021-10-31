@@ -5,3 +5,4 @@ class PaymentRecord {
         this.amount = raw.amount;
     }
 }
+module.exports = PaymentRecord;

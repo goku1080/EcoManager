@@ -37,3 +37,4 @@ class ShopItem {
     
     }
 }
+module.exports = ShopItem;

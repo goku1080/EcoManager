@@ -20,3 +20,4 @@ class InventoryManager {
       return inventory;
     }
 }
+module.exports = InventoryManager;

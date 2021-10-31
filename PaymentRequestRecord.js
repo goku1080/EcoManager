@@ -13,3 +13,4 @@ class PaymentRequestRecord {
         this.status = status;
     }
 }
+module.exports = PaymentRequestRecord;

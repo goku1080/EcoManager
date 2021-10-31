@@ -60,3 +60,4 @@ class InventoryItem {
         return true;
     }
 }
+module.exports = InventoryItem;

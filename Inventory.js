@@ -44,3 +44,4 @@ class Inventory {
          return itemObj;
      }
 }
+module.exports = Inventory;

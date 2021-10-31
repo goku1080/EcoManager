@@ -55,3 +55,4 @@ class BankCard {
         return true;
     }
 }
+module.exports = BankCard;
