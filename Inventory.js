@@ -15,7 +15,7 @@ class Inventory {
         this.items = items;
         return items;
     }
-    addItem(itemid, amount = 1){
+    async addItem(itemid, amount = 1){
       var item = this.rest.restObj.itemManager.get(itemid);
       if(!item) return false;
       var alreadyHas = await this.get(itemid);
