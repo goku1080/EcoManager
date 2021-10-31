@@ -14,7 +14,8 @@ class RestInstance {
             users: new megadb.crearDB(guildID, "users_eco"),
             trs: new megadb.crearDB(guildID, "transactions"),
             items: new megadb.crearDB(guildID, "items"),
-            inventories: new megadb.crearDB(guildID, "inventories")
+            inventories: new megadb.crearDB(guildID, "inventories"),
+            shopitems: new megadb.crearDB(guildID, "shopitems")
         };
         this.info = {client,guildID,db:this.db,Discord,restObj:this};
         this.client = client;
