@@ -1,5 +1,5 @@
 const megadb = require('megadb');
-const { UserManager } = require('./')
+const { UserManager } = require('./UserManager.js');
 class EcoManager {
     constructor(rest){
         this.rest = rest;
