@@ -1,9 +1,38 @@
 const Transaction = require('./Transaction.js');
 class AccountTransactionManager {
+    /**
+     * 
+     * @param {Object} rest Rest Info object
+     * @param {BankAccount} account Bank Account class instanced
+     */
     constructor(rest, account){
+        /**
+         * @type {Object}
+         * 
+         * Rest Info object
+         */
         this.rest = rest;
+        /**
+         * @type {BankAccount}
+         * 
+         * Transactions' Bank Account class instanced
+         */
         this.account = account;
     }
+    /**
+     * 
+     * @param {String} type The type of transaction ("payment" or "payment_request")
+     * 
+     * @param {Object} data Transaction record data
+     * @property {String} sender Transaction sender
+     * @property {String} receptor Transaction Receptor
+     * @property {Number} amount Transaction Amount - This only exists on "Payment" and "Payment request" types
+     * @property {boolean} status Transaction status - This only exists on "Payment request" type
+     * 
+     * @returns {Transaction} Transaction instanced class
+     * 
+     * Record/creates a transaction
+     */
     async record(type, data){
       /*
       Types
@@ -29,7 +58,7 @@ class AccountTransactionManager {
             type,
             sender: this.account.user,
             receptor: data.receptor,
-            amount: data.amount
+            amount: parseInt(data.amount)
          };
            this.rest.db.trs.set(id,transactionRaw);
            var tL = new Transaction(this.rest, transactionRaw);
@@ -44,7 +73,7 @@ class AccountTransactionManager {
           sender: this.account.user,
           receptor: data.receptor,
           status: false,
-          amount: data.amount
+          amount: parseInt(data.amount)
          };
          this.rest.db.trs.set(id,transactionRaw);
          var tL = new Transaction(this.rest, transactionRaw);
@@ -52,6 +81,14 @@ class AccountTransactionManager {
          break;
      }
     }
+    /**
+     * 
+     * @param {String} id Transaction's ID
+     * 
+     * @returns {Transaction} false If fails, Transaction instanced class if success
+     * 
+     * Gets transaction
+     */
     async get(id = null){
       if(!id){
           var transactions = await this.rest.db.trs.values();

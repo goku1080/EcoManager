@@ -1,9 +1,32 @@
 const Inventory = require('./Inventory.js');
 class InventoryManager {
+  /**
+     * 
+     * @param {Object} rest Rest Info object
+     * @param {EcoManager} manager Eco Manager instance
+     */
     constructor(rest, manager){
-        this.rest = rest;
-        this.manager = manager;
+         /**
+         * @type {Object}
+         * 
+         * Rest Info object
+         */
+          this.rest = rest;
+          /**
+           * @type {EcoManager}
+           * 
+           * Eco Manager instance
+           */
+          this.manager = manager;
     }
+    /**
+     * 
+     * @param {String} userID User's Discord ID
+     * 
+     * @returns {boolean} Result (True or False)
+     * 
+     * Creates user inventory
+     */
     async create(userID){
       var isCreated = await this.rest.db.inventories.get(userID);
       if(isCreated) return false;
@@ -11,7 +34,14 @@ class InventoryManager {
           userID,
           items: []
       });
+      return true;
     }
+    /**
+     * 
+     * @param {String} userID User's Discord ID
+     *  
+     * @returns {Inventory} Inventory instanced class - `false` If fails
+     */
     async get(userID){
       this.create(userID); // To be sure that the user has a inventory ^^
       var inventoryRaw = await this.rest.db.inventories.get(userID);

@@ -1,8 +1,33 @@
 class BankAccount {
+    /**
+     * 
+     * @param {Object} rest Rest Info object
+     * @param {Object} raw Raw Bank Account
+     */
     constructor(rest, raw){
+        /**
+         * @type {Object}
+         * 
+         * Rest Info object
+         */
         this.rest = rest;
+        /**
+         * @type {Object}
+         * 
+         * Raw Bank Account object
+         */
         this.raw = raw;
+        /**
+         * @type {String}
+         * 
+         * User ID
+         */
         this.user = raw.userID;
+        /**
+         * @type {Number}
+         * 
+         * Bank Account balance
+         */
         this.balance = raw.balance;
         /* Cards raw: {
         id: $id,
@@ -10,6 +35,11 @@ class BankAccount {
         valid: $validStatus (true/false)
         }
         $id = in order of cards; 1, 2, 3
+        */
+       /**
+        * @type {Array}
+        * 
+        * Cards in Bank Account
         */
         this.cards;
     }
