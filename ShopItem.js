@@ -19,7 +19,7 @@ class ShopItem {
         var validFields = [
             {
                 field: "price",
-                type: "int"
+                type: "number"
             }
         
         ];

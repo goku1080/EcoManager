@@ -14,7 +14,7 @@ class InventoryItem {
          var iL = new Item(this.rest, item);
          return iL;
     }
-    add(amount){ // Adds an amount of the item to the inventory
+    async add(amount){ // Adds an amount of the item to the inventory
      var inv = await this.rest.db.inventories.get(this.inventory.userID);
      var total = this.amount + amount;
      inv.items.find(i => i.id == this.itemID).amount = total;
@@ -22,7 +22,7 @@ class InventoryItem {
      this.amount = total;
      return true;
     }
-    substract(){ // Substracts an amount of the item to the inventory
+    async substract(){ // Substracts an amount of the item to the inventory
         var inv = await this.rest.db.inventories.get(this.inventory.userID);
         var total = this.amount - amount;
         if(total >= 1) {
@@ -38,7 +38,7 @@ class InventoryItem {
         }
  
     }
-    setAmount(amount){ // Sets an amount to the item in the inventory
+    async setAmount(amount){ // Sets an amount to the item in the inventory
         var inv = await this.rest.db.inventories.get(this.inventory.userID);
         if(amount < 1){
             var newArrItems = inv.items.filter(i => i.id != this.itemID);
@@ -52,7 +52,7 @@ class InventoryItem {
             return true;
         }
     }
-    delete(){ // Forces to delete the item from the inventory
+    async delete(){ // Forces to delete the item from the inventory
         var inv = await this.rest.db.inventories.get(this.inventory.userID);
         var newArrItems = inv.items.filter(i => i.id != this.itemID);
         this.rest.db.inventories.set(`${this.inventory.userID}.items`, newArrItems);

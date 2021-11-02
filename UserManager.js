@@ -5,6 +5,23 @@ class UserManager {
         this.rest = rest;
         this.manager = manager;
     }
+    async create(userID){
+        if(await this.get(userID)) return false;
+        var uR = {
+            user: {
+                id: user.id,
+                tag: user.tag
+               },
+            cash: 0
+        };
+        this.rest.db.users.set(userID, uR);
+        return new User(this.rest, uR);
+    }
+    async delete(userID){
+        if(await this.get(userID)) return false;
+        this.rest.db.users.delete(userID);
+        return true;
+    }
     async get(userID = null){
        if(!userID){
           let users = await this.rest.db.users.values();

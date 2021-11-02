@@ -5,6 +5,8 @@ class User {
        this.id = raw.user.id;
        this.userInfo = raw.user;
        this.balance = raw.cash;
+       this.bankAccount = new UserBankManager(this.rest, this);
+       this.inventory = new UserInventoryManager(this.rest, this);
     }
     addCash(amount){
         if(typeof amount != "number") return false;
@@ -25,10 +27,12 @@ class User {
     }
     async fetchBankAccount(){
         var acc = await this.rest.restObj.bankManager.get(this.id);
+        this.bankAccount = acc;
         return acc;
     }
     async fetchInventory(){
         var inventory = await this.rest.restObj.inventoryManager.get(this.id);
+        this.inventory = inventory;
         return inventory;
     }
 }
