@@ -1,5 +1,4 @@
 const megadb = require('megadb');
-const Discord = require('discord.js');
 const EcoManager = require('./EcoManager.js');
 const UserManager = require('./UserManager.js');
 const ItemManager = require('./ItemManager.js');
@@ -7,9 +6,9 @@ const BankManager = require('./BankManager.js');
 const TransactionManager = require('./TransactionManager.js');
 const InventoryManager = require('./InventoryManager.js');
 const ShopManager = require('./ShopManager.js');
-const Discord = require('discord.js');
 class RestInstance {
     constructor(client, guildID){
+        var Discord = require('discord.js');
         this.db = {
             accs: new megadb.crearDB(guildID, "bankAccounts"),
             users: new megadb.crearDB(guildID, "users_eco"),
