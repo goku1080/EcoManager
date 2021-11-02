@@ -1,4 +1,5 @@
 const megadb = require('megadb');
+const Discord = require('discord.js');
 const EcoManager = require('./EcoManager.js');
 const UserManager = require('./UserManager.js');
 const ItemManager = require('./ItemManager.js');
