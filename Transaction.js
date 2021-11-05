@@ -22,18 +22,6 @@ class Transaction {
         /**
          * @type {String}
          * 
-         * Sender's Discord ID
-         */
-        this.sender = raw.sender;
-        /**
-         * @type {String}
-         * 
-         * Receptor's Discord ID
-         */
-        this.receptor = raw.receptor;
-        /**
-         * @type {String}
-         * 
          * Transaction type
          */
         this.type = raw.type;
@@ -52,6 +40,14 @@ class Transaction {
              * Payment Request Record data
              */
             this.record = new PaymentRequestRecord(this.rest, this.raw); 
+        }
+        if(this.type == "purchase"){
+             /**
+             * @type {PurchaseRecord}
+             * 
+             * Purchase Record data
+             */
+              this.record = new PurchaseRecord(this.rest, this.raw); 
         }
     }
 

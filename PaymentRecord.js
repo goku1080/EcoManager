@@ -12,6 +12,18 @@ class PaymentRecord {
          */
         this.rest = rest;
         /**
+         * @type {String}
+         * 
+         * Sender's Discord ID
+         */
+         this.sender = raw.sender;
+         /**
+          * @type {String}
+          * 
+          * Receptor's Discord ID
+          */
+         this.receptor = raw.receptor;
+        /**
          * @type {Object}
          * 
          * Raw Transaction object

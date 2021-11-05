@@ -24,10 +24,11 @@ class AccountTransactionManager {
      * @param {String} type The type of transaction ("payment" or "payment_request")
      * 
      * @param {Object} data Transaction record data
-     * @property {String} sender Transaction sender
-     * @property {String} receptor Transaction Receptor
-     * @property {Number} amount Transaction Amount - This only exists on "Payment" and "Payment request" types
-     * @property {boolean} status Transaction status - This only exists on "Payment request" type
+     * @property {String} sender Transaction sender - Needed in [*]
+     * @property {String} receptor Transaction Receptor - Needed in ["Payment", "Payment Request"]
+     * @property {String} itemID Transaction Item ID - Needed in ["Purchase"]
+     * @property {Number} amount Transaction Amount - Needed in ["Payment", "Payment Request", "Purchase"]
+     * @property {boolean} status Transaction status - Needed in ["Payment Request"]
      * 
      * @returns {Transaction} Transaction instanced class
      * 
@@ -78,6 +79,22 @@ class AccountTransactionManager {
          this.rest.db.trs.set(id,transactionRaw);
          var tL = new Transaction(this.rest, transactionRaw);
          return tL;
+         break;
+         case "purchase":
+          if(!data.itemID) return false;
+          if(!data.amount){
+              data.amount = 1;
+          }
+          var id = `${this.rest.db.trs.size()+1}`;
+          var tR = {
+              id,
+              type,
+              sender: this.account.user,
+              item: data.itemID,
+              amount: parseInt(data.amount)
+          }
+          this.rest.db.trs.set(id,tR);
+         var tL = new Transaction(this.rest, tR);
          break;
      }
     }
